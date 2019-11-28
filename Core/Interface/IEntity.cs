@@ -1,0 +1,13 @@
+﻿using System;
+
+namespace Core.Interface
+{
+    public interface IEntity<TKey>
+    {
+        TKey Id { get; set; }
+    }
+
+    public interface IEntity : IEntity<string>
+    {
+    }
+}
