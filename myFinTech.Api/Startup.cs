@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Core.Entities;
 using Core.Interface;
 using Data;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using myFinTech.Api.Profilers;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -45,7 +47,14 @@ namespace myFinTech.Api
                         if (o.SerializerSettings.ContractResolver is DefaultContractResolver castedResolver) castedResolver.NamingStrategy = null;
                     }
                 });
+            // Auto Mapper Configurations
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new WatchListProfile());
+            });
 
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
             //IOption Pattern
             services.Configure<Settings>(Configuration);
 
