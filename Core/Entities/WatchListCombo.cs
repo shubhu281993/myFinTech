@@ -8,6 +8,7 @@ using System.Text;
 
 namespace Core.Entities
 {
+    [Serializable]
     [BsonIgnoreExtraElements]
     public class WatchListCombo : IEntity
     {
@@ -27,7 +28,7 @@ namespace Core.Entities
         [MaxLength(10)]
         public string Description { get; set; }
 
-        public List<WatchListDetailsCombo> watchListDetails { get; set; }
+        public List<WatchListDetailsCombo> Details { get; set; }
 
 
     }
@@ -35,6 +36,8 @@ namespace Core.Entities
     [BsonIgnoreExtraElements]
     public class WatchListDetailsCombo
     {
+        [BsonId]
+        public ObjectId Id { get; set; }
         public string InstrumentName { get; set; }
         public string InstrumentId { get; set; }
         public string SortID { get; set; }
